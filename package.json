@@ -40,7 +40,8 @@
     "axios": "^0.21.1",
     "bootstrap": "^5.1.0",
     "vue": "^3.2.3",
-    "vue-router": "^4.0.11"
+    "vue-router": "^4.0.11",
+    "vuex": "^4.0.2"
   },
   "__browserslist": "이 프로젝트가 지원하는 대상 브라우저를 지정 for Autoprefixer!",
   "browserslist": [
