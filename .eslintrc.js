@@ -2,8 +2,7 @@ module.exports = {
   // 사전에 정의된 전역 변수를 설정합니다.
   env: {
     browser: true,
-    node: true,
-    es6: true
+    node: true
   },
 
   // 사용 가능한 규칙 세트입니다.
@@ -16,7 +15,6 @@ module.exports = {
 
   // 구문 분석할 패키지를 설정합니다.(Babel, ES6^ => ES5)
   parserOptions: {
-    ecmaVersion : 6,
     parser: 'babel-eslint'
   },
 
