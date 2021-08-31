@@ -39,6 +39,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "bootstrap": "^5.1.0",
+    "lodash": "^4.17.21",
     "vue": "^3.2.3",
     "vue-router": "^4.0.11",
     "vuex": "^4.0.2"
