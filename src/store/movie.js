@@ -5,7 +5,7 @@ export default {
   namespaced: true, // module!
   state: () => ({ // data!
     movies: [],
-    message: '',
+    message: 'Search for the movie title!',
     loading: false
   }),  
   getters: { }, // computed!
@@ -23,6 +23,12 @@ export default {
   },  
   actions: { // 비동기로 동작
     async searchMovies({ state, commit }, payload) {
+      if (state.loading) return
+      
+      commit('updateState', {
+        message: '',
+        loading: true
+      })
       try {
         const res = await _fetchMovie({
           ...payload,
@@ -60,13 +66,17 @@ export default {
             movies: [],
             message
           })
+      } finally {
+        commit('updateState', {
+          loading: false
+        })
       }
     }
   }
 }
 
 function _fetchMovie(payload) {
-  const { title, type, number, year, page } = payload
+  const { title, type, year, page } = payload
   const OMDB_API_KEY='7035c60c'
   const url = `https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${title}&type=${type}&y=${year}&page=${page}`
 
