@@ -3,6 +3,7 @@ const path = require('path') // path: NodeJS에서 파일 및 디렉토리 경�
 const HtmlPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
+const Dotenv = require('dotenv-webpack')
 
 // export
 module.exports = {
@@ -70,7 +71,8 @@ module.exports = {
         { from: 'static' }
       ]
     }),
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+    new Dotenv()
   ],
   devServer: {
     host: 'localhost',
