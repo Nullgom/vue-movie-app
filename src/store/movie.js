@@ -3,15 +3,23 @@ import _uniqBy from 'lodash/uniqBy'
 
 const _defaultMessage =  'Search for the movie title!'
 export default {
+  // 현재 파일(movie.js)을 Store 모듈로 활용하려면 다음 옵션이 필요합니다.
   namespaced: true, // module!
+
+  // Vue.js data 옵션과 유사합니다.
+  // 상태(State)는 함수로 만들어서 객체 데이터를 반환해야 가변 이슈(데이터 불변성)가 발생하지 않습니다!
   state: () => ({ // data!
     movies: [],
     message: _defaultMessage,
     loading: false,
     theMovie: {}
   }),  
+
+  // Vue.js computed 옵션과 유사합니다.
   getters: { }, // computed!
-  // methods!
+
+   // Vue.js methods 옵션과 유사합니다.
+  // 상태(State)는 변이(Mutations)를 통해서만 값을 바꿀 수 있습니다.
   mutations: { // 변이
     updateState(state, payload) {
       //  ['movies', 'message', 'loading']
@@ -25,6 +33,10 @@ export default {
       state.loading = false
     }
   },  
+
+  // Vue.js methods 옵션과 유사합니다.
+  // 변이(Mutations)가 아닌 나머지 모든 로직을 관리합니다.
+  // 비동기로 동작합니다.
   actions: { // 비동기로 동작
     async searchMovies({ state, commit }, payload) {
       if (state.loading) return
@@ -46,7 +58,7 @@ export default {
         console.log(typeof totalResults) // string
   
         const total = parseInt(totalResults, 10)
-        const pageLength = Math.ceil(total / 10) // 263 / 10  -> 27
+        const pageLength = Math.ceil(total / 10) //총 페이지의 길이 263 / 10  -> 27 
   
         // 추가 요청!
         if(pageLength > 1) {
@@ -65,7 +77,7 @@ export default {
             })
           }
         }
-      } catch(message) {
+      } catch({ message }) {
           commit('updateState', {
             movies: [],
             message
@@ -86,7 +98,7 @@ export default {
 
       try {
         const res = await _fetchMovie(payload)
-        console.log(res.data)
+        //console.log(res.data)
         commit('updateState', {
           theMovie: res.data
         })
@@ -102,24 +114,7 @@ export default {
     }
   }
 }
-
-function _fetchMovie(payload) {
-  const { title, type, year, page, id} = payload
-  const OMDB_API_KEY='7035c60c'
-  const url = id
-    ? `https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&i=${id}`
-    : `https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${title}&type=${type}&y=${year}&page=${page}`
-
-  return new Promise((resolve, reject) =>  {
-    axios.get(url)
-        .then(res => { 
-          if(res.data.Error) {
-            reject(res.data.Error)
-          }
-          resolve(res) 
-        })
-        .catch(err => {
-          reject(err.message)
-        })
-  })
+// eslint-disable-next-line
+async function _fetchMovie(payload) {
+  return await axios.post('/.netlify/functions/movie', payload)
 }
