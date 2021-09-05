@@ -4,8 +4,8 @@
   "description": "Vue3 Movie App",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --mode development",
-    "dev:netlify": "netlify dev",
+    "dev:webpack": "webpack-dev-server --mode development",
+    "dev": "netlify dev",
     "build": "webpack --mode production",
     "lint": "eslint --fix --ext .js,.vue"
   },
