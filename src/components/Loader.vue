@@ -5,8 +5,13 @@
       height: `${size}rem`,
       zIndex
     }"
-    :class="{ absolute, fixed}"
-    class="spinner-border text-primary"></div>
+    :class="{ 
+      absolute, 
+      fixed
+    }"
+    class="spinner-border text-primary">
+    <span class="visually-hidden">Loading...</span>
+  </div>
 </template>
 
 <script>

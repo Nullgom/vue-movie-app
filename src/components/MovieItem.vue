@@ -53,7 +53,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped >
+<style lang="scss" scoped>
   .movie {
     $width: 200px;
     width: $width;
